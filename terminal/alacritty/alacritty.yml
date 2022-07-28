@@ -111,7 +111,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "Noto Sans Mono"
+    family: "Arimo Regular Nerd Font Complete"
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
@@ -177,11 +177,11 @@ font:
 
 # Base16 Gruvbox dark, hard 256 - alacritty color config
 # Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
-colors:
+#colors:
   # Default colors
-  primary:
-    background: '#1d2021'
-    foreground: '#d5c4a1'
+  #primary:
+  #  background: '#1d2021'
+  #  foreground: '#d5c4a1'
 
     # Bright and dim foreground colors
     #
@@ -198,9 +198,9 @@ colors:
   #
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  cursor:
-    text: '#1d2021'
-    cursor: '#d5c4a1'
+  #cursor:
+  #  text: '#1d2021'
+  #  cursor: '#d5c4a1'
 
   # Vi mode cursor colors
   #
@@ -268,26 +268,26 @@ colors:
   #  background: CellForeground
 
   # Normal colors
-  normal:
-    black:   '#1d2021'
-    red:     '#fb4934'
-    green:   '#b8bb26'
-    yellow:  '#fabd2f'
-    blue:    '#83a598'
-    magenta: '#d3869b'
-    cyan:    '#8ec07c'
-    white:   '#d5c4a1'
+  #normal:
+  #  black:   '#1d2021'
+  #  red:     '#fb4934'
+  #  green:   '#b8bb26'
+  #  yellow:  '#fabd2f'
+  #  blue:    '#83a598'
+  #  magenta: '#d3869b'
+  #  cyan:    '#8ec07c'
+  #  white:   '#d5c4a1'
 
   # Bright colors
-  bright:
-    black:   '#665c54'
-    red:     '#fb4934'
-    green:   '#b8bb26'
-    yellow:  '#fabd2f'
-    blue:    '#83a598'
-    magenta: '#d3869b'
-    cyan:    '#8ec07c'
-    white:   '#fbf1c7'
+  #bright:
+  #  black:   '#665c54'
+  #  red:     '#fb4934'
+  #  green:   '#b8bb26'
+  #  yellow:  '#fabd2f'
+  #  blue:    '#83a598'
+  #  magenta: '#d3869b'
+  #  cyan:    '#8ec07c'
+  #  white:   '#fbf1c7'
 
   # Dim colors
   #
@@ -311,13 +311,13 @@ colors:
   # Example:
   #   `- { index: 16, color: '#ff00ff' }`
   #
-  indexed_colors:
-    - { index: 16, color: '#fe8019' }
-    - { index: 17, color: '#d65d0e' }
-    - { index: 18, color: '#3c3836' }
-    - { index: 19, color: '#504945' }
-    - { index: 20, color: '#bdae93' }
-    - { index: 21, color: '#ebdbb2' }
+  #indexed_colors:
+  #  - { index: 16, color: '#fe8019' }
+  #  - { index: 17, color: '#d65d0e' }
+  #  - { index: 18, color: '#3c3836' }
+  #  - { index: 19, color: '#504945' }
+  #  - { index: 20, color: '#bdae93' }
+  #  - { index: 21, color: '#ebdbb2' }
 
 # Bell
 #
@@ -727,12 +727,16 @@ colors:
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
+  - { key: Key0,     mods: Control, action: ResetFontSize                }
+  - { key: Equals,   mods: Control, action: IncreaseFontSize             }
+  - { key: Subtract, mods: Control, action: DecreaseFontSize             }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
   #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
   - { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp,  }
   - { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
+    #  - { key: F11, action: ToggleFullscreen }
   #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
   #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
 
@@ -800,9 +804,9 @@ key_bindings:
 
   # (Windows, Linux, and BSD only)
   #- { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
-  #- { key: V,              mods: Alt,                             action: Paste            }
+  - { key: V,        mods: Alt, action: Paste                            }
   #- { key: C,              mods: Control|Shift,                   action: Copy             }
-  #- { key: C,              mods: Alt,                             action: Copy             }
+  - { key: C,        mods: Alt, action: Copy                             }
   #- { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    }
   #- { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
   #- { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }

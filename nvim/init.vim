@@ -5,11 +5,17 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-sensible'
 Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'sbdchd/neoformat'
 
 " Syntax
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Autocomplete
 Plug 'hrsh7th/vim-vsnip'
@@ -28,6 +34,12 @@ call plug#end()
 " Colorscheme
 let base16colorspace=256
 colorscheme base16-gruvbox-dark-hard
+
+"For Types hint 
+hi default CocRustTypeHint ctermbg=0 ctermfg=DarkGray
+"Others hint 
+hi default CocRustChainingHint ctermbg=0 ctermfg=DarkGray
+
 
 " Autocomplete
 set completeopt=menu,menuone,noselect
@@ -95,3 +107,5 @@ let mapleader = "\<Space>"
 
 inoremap jj <esc>
 nnoremap <leader><leader> <c-^>
+inoremap <esc> <C-o>:echo "NO ESAPCE FOR YOU"<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
