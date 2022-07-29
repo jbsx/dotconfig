@@ -1,6 +1,6 @@
 # Configuration
-copy alacritty.yml to ~/.config/alacritty/alacritty.yml <br />
-copy /nvim to ~/.config/ and run the following inside nvim: <br />
+copy .alacritty.yml to $HOME directory<br />
+copy /nvim to $HOME/.config/ and run the following inside nvim: <br />
 	- :PlugInstall <br />
 	- :CocInstall coc-sh coc-json coc-pyright coc-tsserver coc-rust-analyzer <br />
 
