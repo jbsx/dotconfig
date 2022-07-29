@@ -1,3 +1,3 @@
 #!/bin/bash
-cp -r ~/.config/nvim/init.vim ./nvim/
-cp ~/Documents/alacritty/alacritty.yml ./terminal/alacritty/
+cp ~/.config/nvim/init.vim ./nvim/
+cp ~/.alacritty.yml ./terminal/
