@@ -2,6 +2,8 @@ set shell=/bin/bash
 call plug#begin('~/.config/nvim/plugged')
 
 " Nvim configuration
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-sensible'
 Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
