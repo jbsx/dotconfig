@@ -2,8 +2,7 @@ set shell=/bin/bash
 call plug#begin('~/.config/nvim/plugged')
 
 " Nvim configuration
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-sensible'
 Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
@@ -11,18 +10,10 @@ Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sbdchd/neoformat'
-
-" Syntax
-Plug 'cespare/vim-toml'
-Plug 'stephpy/vim-yaml'
-Plug 'rust-lang/rust.vim'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Autocomplete
+Plug 'luochen1990/rainbow'
+Plug 'sheerun/vim-polyglot'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -36,6 +27,28 @@ call plug#end()
 " Colorscheme
 let base16colorspace=256
 colorscheme base16-gruvbox-dark-hard
+
+" luochen1990/rainbow
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" add cocstatus into lightline
+let g:lightline = {
+	\ 'colorscheme': 'wombat',
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+	\ },
+	\ 'component_function': {
+	\   'cocstatus': 'coc#status'
+	\ },
+	\ }
+
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 "For Types hint 
 hi default CocRustTypeHint ctermbg=0 ctermfg=DarkGray
