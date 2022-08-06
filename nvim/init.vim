@@ -21,38 +21,34 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
+Plug 'itchyny/vim-gitbranch'
 
 call plug#end()
 
 " Colorscheme
 let base16colorspace=256
-colorscheme base16-gruvbox-dark-hard
+colorscheme base16-gruvbox-dark-medium
 
 " luochen1990/rainbow
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" add cocstatus into lightline
 let g:lightline = {
-	\ 'colorscheme': 'wombat',
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-	\ },
-	\ 'component_function': {
-	\   'cocstatus': 'coc#status'
-	\ },
-	\ }
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ],
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
 
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 "For Types hint 
 hi default CocRustTypeHint ctermbg=0 ctermfg=DarkGray
-"Others hint 
 hi default CocRustChainingHint ctermbg=0 ctermfg=DarkGray
 
 
