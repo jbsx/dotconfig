@@ -55,6 +55,8 @@ set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
+set incsearch
+set scrolloff=8
 
 
 " ################## KEY MAPS ##################
@@ -118,3 +120,5 @@ map <leader>w :w<CR> :Neoformat<CR>
 map <leader>p :Neoformat<CR>
 
 map <leader>r :noh<CR>
+
+
