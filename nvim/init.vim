@@ -51,6 +51,10 @@ set cursorline
 syntax enable
 filetype plugin indent on
 set encoding=utf-8
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
 
 
 " ################## KEY MAPS ##################
@@ -82,9 +86,9 @@ lnoremap <C-k> <Esc>
 tnoremap <C-k> <Esc>
 
 " Suspend with Ctrl+f
-inoremap <C-f> :sus<cr>
-vnoremap <C-f> :sus<cr>
-nnoremap <C-f> :sus<cr>
+"inoremap <C-f> :sus<cr>
+"vnoremap <C-f> :sus<cr>
+"nnoremap <C-f> :sus<cr>
 
 " Jump to start and end of line using the home row keys
 map H ^
@@ -112,3 +116,5 @@ map <leader>w :w<CR> :Neoformat<CR>
 
 " Prettier
 map <leader>p :Neoformat<CR>
+
+map <leader>r :noh<CR>
