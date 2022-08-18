@@ -118,7 +118,7 @@ nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
 
 " Quick-save and prettier
-map <leader>w :w<CR> :Neoformat<CR>
+map <leader>w :Neoformat<CR> :w<CR> 
 
 " Prettier
 map <leader>p :Neoformat<CR>
