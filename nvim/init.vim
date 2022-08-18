@@ -13,12 +13,13 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sbdchd/neoformat'
 Plug 'luochen1990/rainbow'
 Plug 'sheerun/vim-polyglot'
+Plug 'gruvbox-community/gruvbox'
 
 call plug#end()
 
 " Colorscheme
 let base16colorspace=256
-colorscheme base16-gruvbox-dark-medium
+colorscheme gruvbox
 
 " luochen1990/rainbow
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -41,6 +42,7 @@ let g:lightline = {
 "For Types hint 
 hi default CocRustTypeHint ctermbg=0 ctermfg=DarkGray
 hi default CocRustChainingHint ctermbg=0 ctermfg=DarkGray
+hi Normal guibg=NONE ctermbg=NONE
 
 " Autocomplete
 set completeopt=menu,menuone,noselect
@@ -57,6 +59,8 @@ set expandtab
 set smartindent
 set incsearch
 set scrolloff=8
+set nohlsearch
+set nowrap
 
 
 " ################## KEY MAPS ##################
@@ -118,7 +122,4 @@ map <leader>w :w<CR> :Neoformat<CR>
 
 " Prettier
 map <leader>p :Neoformat<CR>
-
-map <leader>r :noh<CR>
-
 
