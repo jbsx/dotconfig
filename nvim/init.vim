@@ -3,6 +3,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Nvim configuration
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-sensible'
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
@@ -101,7 +103,7 @@ map H ^
 map L $
 
 inoremap jj <esc>
-nnoremap <leader><leader> <c-^>
+nnoremap <leader><leader> <C-^>
 inoremap <esc> <C-o>:echo "NO ESAPCE FOR YOU"<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 
@@ -117,9 +119,16 @@ inoremap <right> <nop>
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
 
+" FZF
+nnoremap <leader>f  :FZF<CR>
+" g = grep (ripgrep)
+nnoremap <leader>g  :Rg<CR>
+" h = home
+nnoremap <leader>h  :FZF ~/<CR>
+" b = BLines
+nnoremap <leader>b :BLines<CR>
+" t = buffers
+nnoremap <leader>t :Buf<CR>
+
 " Quick-save and prettier
-map <leader>w :Neoformat<CR> :w<CR> 
-
-" Prettier
-map <leader>p :Neoformat<CR>
-
+map <leader>w :Neoformat \| w<CR>
