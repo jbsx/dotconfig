@@ -66,7 +66,6 @@ set nowrap
 
 
 " ################## KEY MAPS ##################
-
 let mapleader = "\<Space>"
 
 " Ctrl+j and Ctrl+k as Esc
@@ -93,11 +92,6 @@ onoremap <C-k> <Esc>
 lnoremap <C-k> <Esc>
 tnoremap <C-k> <Esc>
 
-" Suspend with Ctrl+f
-"inoremap <C-f> :sus<cr>
-"vnoremap <C-f> :sus<cr>
-"nnoremap <C-f> :sus<cr>
-
 " Jump to start and end of line using the home row keys
 map H ^
 map L $
@@ -115,6 +109,10 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+" Vertical movement
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 " Left and right can switch buffers
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
@@ -122,11 +120,11 @@ nnoremap <right> :bn<CR>
 " FZF
 nnoremap <leader>f  :FZF<CR>
 " g = grep (ripgrep)
-nnoremap <leader>g  :Rg<CR>
+nnoremap <leader>r  :Rg<CR>
 " h = home
 nnoremap <leader>h  :FZF ~/<CR>
 " b = BLines
-nnoremap <leader>b :BLines<CR>
+nnoremap <leader>j :BLines<CR>
 " t = buffers
 nnoremap <leader>t :Buf<CR>
 
