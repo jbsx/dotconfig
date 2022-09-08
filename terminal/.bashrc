@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -76,12 +76,12 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
 
-    #alias grep='grep --color=auto'
-    #alias fgrep='fgrep --color=auto'
-    #alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 #autojump
@@ -127,9 +127,31 @@ export EDITOR=/usr/bin/nvim
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s ".config/base16-shell/profile_helper.sh" ] && \
         eval "$(".config/base16-shell/profile_helper.sh")"
-source /home/jaish/Documents/alacritty/extra/completions/alacritty.bash
+source /home/jaish/installed_programs/alacritty/extra/completions/alacritty.bash
+
+set termguicolors
+
+# Custom Commands
+
+open_with_fzf() {
+    fdfind -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
+}
+
+cd_with_fzf() {
+    cd $HOME && cd "$(fdfind -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"
+}
+
+# Keybinds
+
+bind '"\C-f":"cd_with_fzf\n"'
+bind '"\C-o":"open_with_fzf\n"'
+bind '"\C-v":"vim\n"'
+
+# Custom aliases
+
+alias vim='nvim'
+alias p='protonvpn-cli'
