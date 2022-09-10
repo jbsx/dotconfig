@@ -84,9 +84,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-#autojump
-[[ -s /home/jaish/.autojump/etc/profile.d/autojump.sh ]] && source /home/jaish/.autojump/etc/profile.d/autojump.sh
-
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -99,10 +96,6 @@ fi
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -121,8 +114,7 @@ fi
 [[ $- != *i* ]] && return
 # Otherwise start tmux
 [[ -z "$TMUX" ]] && exec tmux
-. "$HOME/.cargo/env"
-
+#
 export EDITOR=/usr/bin/nvim
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -131,14 +123,13 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
     [ -s ".config/base16-shell/profile_helper.sh" ] && \
         eval "$(".config/base16-shell/profile_helper.sh")"
-source /home/jaish/installed_programs/alacritty/extra/completions/alacritty.bash
 
 set termguicolors
 
 # Custom Commands
 
 open_with_fzf() {
-    fdfind -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
+    fdfind -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 3>&-
 }
 
 cd_with_fzf() {
@@ -149,9 +140,9 @@ cd_with_fzf() {
 
 bind '"\C-f":"cd_with_fzf\n"'
 bind '"\C-o":"open_with_fzf\n"'
-bind '"\C-v":"vim\n"'
 
 # Custom aliases
 
 alias vim='nvim'
 alias p='protonvpn-cli'
+. "$HOME/.cargo/env"
