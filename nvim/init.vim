@@ -93,14 +93,15 @@ onoremap <C-k> <Esc>
 lnoremap <C-k> <Esc>
 tnoremap <C-k> <Esc>
 
-" Suspend with Ctrl+f
-"inoremap <C-f> :sus<cr>
-"vnoremap <C-f> :sus<cr>
-"nnoremap <C-f> :sus<cr>
+nnoremap <leader>k K
 
 " Jump to start and end of line using the home row keys
 map H ^
 map L $
+
+" Vertical Movement
+nnoremap J <C-d>zz
+nnoremap K <C-u>zz
 
 inoremap jj <esc>
 nnoremap <leader><leader> <C-^>
