@@ -69,6 +69,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# i3lock
+bindsym $mod+Shift+x exec i3lock --image $HOME/Downloads/wp3057572-1517392548.png
+
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -show run -config $HOME/.config/rofi/config.rasi
 # A more modern dmenu replacement is rofi:
