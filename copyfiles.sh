@@ -7,4 +7,4 @@ cp -r $HOME/.tmux.conf ./
 cp -r $HOME/.config/i3/ ./
 cp -r $HOME/.config/polybar/ ./
 cp -r $HOME/.config/rofi/ ./
-
+cp $HOME/.config/greenclip.toml ./

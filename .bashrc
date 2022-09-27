@@ -30,11 +30,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${arch_chroot:-}" ] && [ -r /etc/arch_chroot ]; then
-    arch_chroot=$(cat /etc/arch_chroot)
-fi
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
@@ -57,16 +52,16 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${arch_chroot:+($arch_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${arch_chroot:+($arch_chroot)}\u@\h:\w\$ '
+    PS1='\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${arch_chroot:+($arch_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
@@ -114,20 +109,18 @@ fi
 [[ $- != *i* ]] && return
 # Otherwise start tmux
 [[ -z "$TMUX" ]] && exec tmux
-#
+
 export EDITOR=/usr/bin/nvim
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s ".config/base16-shell/profile_helper.sh" ] && \
-        eval "$(".config/base16-shell/profile_helper.sh")"
 
 set termguicolors
 
 # Autojump
 [[ -s /home/jbsx/.autojump/etc/profile.d/autojump.sh ]] && source /home/jbsx/.autojump/etc/profile.d/autojump.sh
+
+# GO
+export PATH=$PATH:/usr/local/go/bin
 
 # Custom Commands
 
@@ -148,4 +141,6 @@ bind '"\C-o":"open_with_fzf\n"'
 
 alias vim='nvim'
 alias p='protonvpn-cli'
+alias t='tmux'
+alias r='redshift -P -O'
 . "$HOME/.cargo/env"

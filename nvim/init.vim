@@ -93,15 +93,17 @@ onoremap <C-k> <Esc>
 lnoremap <C-k> <Esc>
 tnoremap <C-k> <Esc>
 
+" remapping J and K to free keybinds for vertical scroll
 nnoremap <leader>k K
+nnoremap <C-j> J
 
 " Jump to start and end of line using the home row keys
 map H ^
 map L $
 
 " Vertical Movement
-nnoremap J <C-d>zz
-nnoremap K <C-u>zz
+noremap J <C-d>zz
+noremap K <C-u>zz
 
 inoremap jj <esc>
 nnoremap <leader><leader> <C-^>
@@ -123,7 +125,7 @@ nnoremap <right> :bn<CR>
 " FZF
 nnoremap <leader>f  :FZF<CR>
 " g = grep (ripgrep)
-nnoremap <leader>g  :Rg<CR>
+nnoremap <leader>r  :Rg<CR>
 " h = home
 nnoremap <leader>h  :FZF ~/<CR>
 " b = BLines
