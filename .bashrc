@@ -140,6 +140,7 @@ bind '"\C-o":"open_with_fzf\n"'
 # Custom aliases
 
 alias vim='nvim'
+alias o='xdg-open'
 alias p='protonvpn-cli'
 alias t='tmux'
 alias r='redshift -P -O'

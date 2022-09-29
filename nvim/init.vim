@@ -123,11 +123,11 @@ nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
 
 " FZF
-nnoremap <leader>f  :FZF<CR>
+nnoremap <leader>f :FZF<CR>
 " g = grep (ripgrep)
-nnoremap <leader>r  :Rg<CR>
+nnoremap <leader>r :Rg<CR>
 " h = home
-nnoremap <leader>h  :FZF ~/<CR>
+nnoremap <leader>h :FZF ~/<CR>
 " b = BLines
 nnoremap <leader>b :BLines<CR>
 " t = buffers

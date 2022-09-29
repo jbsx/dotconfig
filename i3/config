@@ -279,6 +279,8 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always --no-startup-id xrdb -merge ~/.Xresources
 #exex_always --no-startup-id xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync && xrandr --output eDP-1 --mode 1920x1080_60.00
 
+exec greenclip daemon
+
 #autostart app in workspaces
 exec /usr/bin/firefox
 exec /usr/bin/alacritty
