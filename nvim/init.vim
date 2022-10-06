@@ -110,6 +110,8 @@ nnoremap <leader><leader> <C-^>
 inoremap <esc> <C-o>:echo "NO ESAPCE FOR YOU"<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 
+inoremap <C-H> <C-w>
+
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
 nnoremap <down> <nop>
