@@ -3,7 +3,7 @@
 - Editor: NeoVim
 - Terminal: Alacritty
 - Shell: Bash
-- Other Msc. tools: Polybar, Rofi, xclip, rofi-greenclip,
+- Msc. tools: Polybar, Rofi, xclip, rofi-greenclip,
                     gruvbox, base16,
 
 
