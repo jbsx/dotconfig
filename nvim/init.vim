@@ -2,14 +2,21 @@ set shell=/bin/bash
 call plug#begin('~/.config/nvim/plugged')
 
 " Nvim configuration
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-sensible'
-Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
-Plug 'chriskempson/base16-vim'
+Plug 'tpope/vim-sensible'
+
 Plug 'preservim/nerdtree'
+Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sbdchd/neoformat'
@@ -18,6 +25,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'gruvbox-community/gruvbox'
 
 call plug#end()
+
 
 " Colorscheme
 let base16colorspace=256
@@ -41,9 +49,7 @@ let g:lightline = {
       \ },
       \ }
 
-"For Types hint 
-hi default CocRustTypeHint ctermbg=0 ctermfg=DarkGray
-hi default CocRustChainingHint ctermbg=0 ctermfg=DarkGray
+" Remove nvim background
 hi Normal guibg=NONE ctermbg=NONE
 
 " Autocomplete
@@ -97,13 +103,15 @@ tnoremap <C-k> <Esc>
 nnoremap <leader>k K
 nnoremap <C-j> J
 
-" Jump to start and end of line using the home row keys
-map H ^
-map L $
-
 " Vertical Movement
 noremap J <C-d>zz
 noremap K <C-u>zz
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Jump to start and end of line using the home row keys
+map H ^
+map L $
 
 inoremap jj <esc>
 nnoremap <leader><leader> <C-^>
@@ -125,15 +133,75 @@ nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
 
 " FZF
-nnoremap <leader>f :FZF<CR>
-" g = grep (ripgrep)
-nnoremap <leader>r :Rg<CR>
-" h = home
-nnoremap <leader>h :FZF ~/<CR>
-" b = BLines
-nnoremap <leader>b :BLines<CR>
+nnoremap <leader>ff :FZF<CR>
+" fg = grep (ripgrep)
+nnoremap <leader>fr :Rg<CR>
+" fb = BLines
+nnoremap <leader>fb :BLines<CR>
 " t = buffers
 nnoremap <leader>t :Buf<CR>
 
 " Quick-save and prettier
 map <leader>w :Neoformat \| w<CR>
+
+
+" LSP
+lua << EOF
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+require('lspconfig')['tsserver'].setup{
+    capabilities = capabilities,
+    on_attach = function()
+    vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, {buffer=0})
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0})
+    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {buffer=0})
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {buffer=0})
+    vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_next, {buffer=0})
+    vim.keymap.set("n", "<leader>E", vim.diagnostic.goto_prev, {buffer=0})
+    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer=0})
+    end,
+    flags = lsp_flags,
+}
+require('lspconfig')['rust_analyzer'].setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = lsp_flags,
+    settings = {
+      ["rust-analyzer"] = {}
+    }
+}
+
+-- Set up nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
+  }, {
+    { name = 'buffer' },
+  })
+})
+EOF

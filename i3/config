@@ -144,7 +144,7 @@ bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~
 bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
 
 # Change Resolution and load wallpaper
-exec xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync && xrandr --addmode eDP-1-1 1920x1080_60.00 && xrandr --output eDP-1-1 --mode 1920x1080_60.00 && nitrogen --restore && redshift -P -O 3600 && picom
+exec xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync && xrandr --addmode eDP-1-1 1920x1080_60.00 && xrandr --output eDP-1-1 --mode 1920x1080_60.00 && nitrogen --restore && redshift -P -O 3600
 #exec xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync && xrandr --addmode eDP-1 1920x1080_60.00 && xrandr --output eDP-1 --mode 1920x1080_60.00 && nitrogen --restore && redshift -P -O 3600
 
 # focus the child container
@@ -232,47 +232,47 @@ bindsym $mod+r mode "resize"
 
 #____________________________________________________________________
 # Gaps
-       gaps inner 4
-       gaps outer 0
-       
-       smart_gaps on
-       
-       # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
-       set $mode_gaps Gaps: (o) outer, (i) inner
-       set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-       set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-       bindsym $mod+Shift+g mode "$mode_gaps"
-       
-       mode "$mode_gaps" {
-               bindsym o      mode "$mode_gaps_outer"
-               bindsym i      mode "$mode_gaps_inner"
-               bindsym Return mode "default"
-               bindsym Escape mode "default"
-       }
-       mode "$mode_gaps_inner" {
-               bindsym plus  gaps inner current plus 5
-               bindsym minus gaps inner current minus 5
-               bindsym 0     gaps inner current set 0
-       
-               bindsym Shift+plus  gaps inner all plus 5
-               bindsym Shift+minus gaps inner all minus 5
-               bindsym Shift+0     gaps inner all set 0
-       
-               bindsym Return mode "default"
-               bindsym Escape mode "default"
-       }
-       mode "$mode_gaps_outer" {
-               bindsym plus  gaps outer current plus 5
-               bindsym minus gaps outer current minus 5
-               bindsym 0     gaps outer current set 0
-       
-               bindsym Shift+plus  gaps outer all plus 5
-               bindsym Shift+minus gaps outer all minus 5
-               bindsym Shift+0     gaps outer all set 0
-       
-               bindsym Return mode "default"
-               bindsym Escape mode "default"
-       }
+       #gaps inner 4
+       #gaps outer 0
+       #
+       #smart_gaps on
+       #
+       ## Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+       #set $mode_gaps Gaps: (o) outer, (i) inner
+       #set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+       #set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+       #bindsym $mod+Shift+g mode "$mode_gaps"
+       #
+       #mode "$mode_gaps" {
+       #        bindsym o      mode "$mode_gaps_outer"
+       #        bindsym i      mode "$mode_gaps_inner"
+       #        bindsym Return mode "default"
+       #        bindsym Escape mode "default"
+       #}
+       #mode "$mode_gaps_inner" {
+       #        bindsym plus  gaps inner current plus 5
+       #        bindsym minus gaps inner current minus 5
+       #        bindsym 0     gaps inner current set 0
+       #
+       #        bindsym Shift+plus  gaps inner all plus 5
+       #        bindsym Shift+minus gaps inner all minus 5
+       #        bindsym Shift+0     gaps inner all set 0
+       #
+       #        bindsym Return mode "default"
+       #        bindsym Escape mode "default"
+       #}
+       #mode "$mode_gaps_outer" {
+       #        bindsym plus  gaps outer current plus 5
+       #        bindsym minus gaps outer current minus 5
+       #        bindsym 0     gaps outer current set 0
+       #
+       #        bindsym Shift+plus  gaps outer all plus 5
+       #        bindsym Shift+minus gaps outer all minus 5
+       #        bindsym Shift+0     gaps outer all set 0
+       #
+       #        bindsym Return mode "default"
+       #        bindsym Escape mode "default"
+       #}
 #____________________________________________________________________
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -300,4 +300,3 @@ exec LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec greenclip daemon
 exec xbindkeys
-

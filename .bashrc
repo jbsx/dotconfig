@@ -106,9 +106,9 @@ fi
 # _______________________________________________________________________________________________________________
 
 # If not running interactively, do not do anything
-[[ $- != *i* ]] && return
+# [[ $- != *i* ]] && return
 # Otherwise start tmux
-[[ -z "$TMUX" ]] && exec tmux
+# [[ -z "$TMUX" ]] && exec tmux
 
 export EDITOR=/usr/bin/nvim
 
@@ -122,14 +122,18 @@ set termguicolors
 # GO
 export PATH=$PATH:/usr/local/go/bin
 
+# Rust-analyzer lsp
+
+export PATH=$PATH:$HOME/.local/bin/
+
 # Custom Commands
 
 open_with_fzf() {
-    fdfind -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 3>&-
+    fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 3>&-
 }
 
 cd_with_fzf() {
-    cd $HOME && cd "$(fdfind -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"
+    cd $HOME && cd "$(fd -t d --hidden | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"
 }
 
 # Keybinds

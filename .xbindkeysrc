@@ -49,10 +49,17 @@
 # specify a mouse button
 #"alacritty"
 #  control + b:2
-
+#
+# switch workspaces with mouse buttons
+#"xte 'keydown Super_L' 'keydown 1' 'keyup Super_L' 'keyup 1'"
+#  b:9 + b:1 + Release
+#"xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
+#  b:9 + b:3 + Release
+#
 "xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
   b:9
 
+#"xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
 "playerctl play-pause"
   b:8
 
@@ -63,9 +70,6 @@
 #"xterm"
 #  alt + c:0x29 + m:4 + mod2
 #
-## Control+Shift+a  release event starts rxvt
-#"rxvt"
-#  release+control+shift + a
 #
 ## Control + mouse button 2 release event starts rxvt
 #"rxvt"
