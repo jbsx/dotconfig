@@ -56,11 +56,18 @@
 #"xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
 #  b:9 + b:3 + Release
 #
+
+
+
+"playerctl --player=spotify play-pause"
+  c:127
+
+# MOUSE BUTTON KEYMAPS
 "xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
   b:9
 
 #"xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
-"playerctl play-pause"
+"playerctl --player=firefox play-pause"
   b:8
 
 #"xterm -geom 50x20+20+20"

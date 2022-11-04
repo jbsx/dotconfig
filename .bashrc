@@ -119,6 +119,9 @@ set termguicolors
 # Autojump
 [[ -s /home/jbsx/.autojump/etc/profile.d/autojump.sh ]] && source /home/jbsx/.autojump/etc/profile.d/autojump.sh
 
+# Appimage bin folder
+export PATH=$PATH:~/.local/bin/
+
 # GO
 export PATH=$PATH:/usr/local/go/bin
 

@@ -2,6 +2,8 @@ set shell=/bin/bash
 call plug#begin('~/.config/nvim/plugged')
 
 " Nvim configuration
+
+"LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -10,11 +12,13 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
+"Editor
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-sensible'
 
+"Visual
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
@@ -23,20 +27,31 @@ Plug 'sbdchd/neoformat'
 Plug 'luochen1990/rainbow'
 Plug 'sheerun/vim-polyglot'
 Plug 'gruvbox-community/gruvbox'
+Plug 'folke/tokyonight.nvim'
+
+"MISCELLANEOUS
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
 
-
 " Colorscheme
 let base16colorspace=256
-colorscheme gruvbox
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight-night
+
+"colorscheme gruvbox
+
+" Remove colorscheme background
+hi Normal guibg=NONE ctermbg=None
 
 " luochen1990/rainbow
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 " lightline
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
@@ -48,9 +63,6 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
-
-" Remove nvim background
-hi Normal guibg=NONE ctermbg=NONE
 
 " Autocomplete
 set completeopt=menu,menuone,noselect
@@ -70,6 +82,28 @@ set scrolloff=8
 set nohlsearch
 set nowrap
 
+" Firenvim settings
+if exists('g:started_by_firenvim')
+    set guifont=LiterationMono\ Nerd\ Font:h12
+    highlight ExtraWhitespace guibg=NONE ctermbg=NONE
+    colorscheme tokyonight-night
+    let g:firenvim_config = { 
+        \ 'globalSettings': {
+            \ 'alt': 'all',
+        \  },
+        \ 'localSettings': {
+            \ '.*': {
+                \ 'cmdline': 'neovim',
+                \ 'content': 'text',
+                \ 'priority': 0,
+                \ 'selector': 'textarea',
+                \ 'takeover': 'never',
+            \ },
+        \ }
+    \ }
+    let fc = g:firenvim_config['localSettings']
+    let fc['https?://leetcode.com/'] = { 'takeover': 'always', 'priority': 1 }
+endif
 
 " ################## KEY MAPS ##################
 
@@ -144,23 +178,33 @@ nnoremap <leader>t :Buf<CR>
 " Quick-save and prettier
 map <leader>w :Neoformat \| w<CR>
 
+" LSP keybinds
+nmap <leader>k :lua vim.lsp.buf.hover() <CR>
+nmap gd :lua vim.lsp.buf.definition() <CR>
+nmap gt :lua vim.lsp.buf.type_definition() <CR>
+nmap gi :lua vim.lsp.buf.implementation() <CR>
+nmap <leader>o :lua vim.diagnostic.open_float() <CR>
+nmap <leader>e :lua vim.diagnostic.goto_next() <CR>
+nmap <leader>E :lua vim.diagnostic.goto_prev() <CR>
+nmap <leader>r :lua vim.lsp.buf.rename() <CR>
 
 " LSP
-lua << EOF
 
+lua << EOF
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, {buffer=0})
+-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0})
+-- vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {buffer=0})
+-- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {buffer=0})
+-- vim.keymap.set("n", "<leader>o", vim.diagnostic.open_float, {buffer=0})
+-- vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_next, {buffer=0})
+-- vim.keymap.set("n", "<leader>E", vim.diagnostic.goto_prev, {buffer=0})
+-- vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer=0})
 
 require('lspconfig')['tsserver'].setup{
     capabilities = capabilities,
-    on_attach = function()
-    vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, {buffer=0})
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0})
-    vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {buffer=0})
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {buffer=0})
-    vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_next, {buffer=0})
-    vim.keymap.set("n", "<leader>E", vim.diagnostic.goto_prev, {buffer=0})
-    vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer=0})
-    end,
+    on_attach = on_attach,
     flags = lsp_flags,
 }
 require('lspconfig')['rust_analyzer'].setup{
@@ -170,6 +214,11 @@ require('lspconfig')['rust_analyzer'].setup{
     settings = {
       ["rust-analyzer"] = {}
     }
+}
+require('lspconfig')['pyright'].setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = lsp_flags,
 }
 
 -- Set up nvim-cmp.
