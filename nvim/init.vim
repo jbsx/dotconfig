@@ -19,6 +19,7 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-sensible'
 
 "Visual
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
@@ -31,17 +32,22 @@ Plug 'folke/tokyonight.nvim'
 
 "MISCELLANEOUS
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    "Svelte syntax highlighting
+    Plug 'othree/html5.vim'
+    Plug 'pangloss/vim-javascript'
+    Plug 'evanleck/vim-svelte', {'branch': 'main'}
+
 
 call plug#end()
 
 " Colorscheme
 let base16colorspace=256
 
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-colorscheme tokyonight-night
+"let g:tokyonight_style = 'night'
+"let g:tokyonight_enable_italic = 1
+"colorscheme tokyonight-night
 
-"colorscheme gruvbox
+colorscheme gruvbox
 
 " Remove colorscheme background
 hi Normal guibg=NONE ctermbg=None
@@ -51,7 +57,7 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 
 " lightline
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
@@ -80,7 +86,7 @@ set smartindent
 set incsearch
 set scrolloff=8
 set nohlsearch
-set nowrap
+"set nowrap
 
 " Firenvim settings
 if exists('g:started_by_firenvim')
@@ -133,9 +139,12 @@ onoremap <C-k> <Esc>
 lnoremap <C-k> <Esc>
 tnoremap <C-k> <Esc>
 
+map <A-J> :m +1<CR>
+map <A-K> :m -2<CR>
+
 " remapping J and K to free keybinds for vertical scroll
-nnoremap <leader>k K
-nnoremap <C-j> J
+nnoremap <A-k> K
+nnoremap <A-j> J
 
 " Vertical Movement
 noremap J <C-d>zz
@@ -177,6 +186,15 @@ nnoremap <leader>t :Buf<CR>
 
 " Quick-save and prettier
 map <leader>w :Neoformat \| w<CR>
+
+" yank to xclip
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>P "+P
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+y$
 
 " LSP keybinds
 nmap <leader>k :lua vim.lsp.buf.hover() <CR>
@@ -220,6 +238,11 @@ require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
+require('lspconfig')['svelte'].setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
 
 -- Set up nvim-cmp.
 local cmp = require'cmp'
@@ -227,7 +250,7 @@ local cmp = require'cmp'
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
       require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
       -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
       -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
