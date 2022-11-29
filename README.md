@@ -4,4 +4,5 @@
 - Terminal: Alacritty
 - Shell: Bash
 - Msc. tools: Polybar, Rofi with dmenu, xclip, rofi-greenclip,
-              gruvbox,Redshift, Nitrogen
+              gruvbox,Redshift, Nitrogen, tmux, xbindkeys, lightdm,
+              mpv, autojump, bash_it,
