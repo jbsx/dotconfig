@@ -5,6 +5,3 @@
 - Shell: Bash
 - Msc. tools: Polybar, Rofi with dmenu, xclip, rofi-greenclip,
               gruvbox,Redshift, Nitrogen
-
-
-:PlugInstall <br />
