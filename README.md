@@ -1,11 +1,10 @@
-- Distro: Arch
-- Desktop Env: i3wm / i3-gaps
+- OS: Arch Linux
+- Desktop Env: i3wm
 - Editor: NeoVim
 - Terminal: Alacritty
 - Shell: Bash
-- Msc. tools: Polybar, Rofi, xclip, rofi-greenclip,
-                    gruvbox, base16,
+- Msc. tools: Polybar, Rofi with dmenu, xclip, rofi-greenclip,
+              gruvbox,Redshift, Nitrogen
 
 
 :PlugInstall <br />
-:CocInstall coc-sh coc-json coc-pyright coc-tsserver coc-rust-analyzer <br />
