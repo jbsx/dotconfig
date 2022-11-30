@@ -62,6 +62,9 @@
 "playerctl --player=spotify play-pause"
   c:127
 
+"playerctl --player=mpv play-pause"
+  Control + c:127
+
 # MOUSE BUTTON KEYMAPS
 "xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
   b:9

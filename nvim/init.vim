@@ -19,7 +19,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-sensible'
 
-"Visual
+"MISCELLANEOUS
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
@@ -30,8 +30,6 @@ Plug 'luochen1990/rainbow'
 Plug 'sheerun/vim-polyglot'
 Plug 'gruvbox-community/gruvbox'
 Plug 'folke/tokyonight.nvim'
-
-"MISCELLANEOUS
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
     "Svelte syntax highlighting
     Plug 'othree/html5.vim'
@@ -151,8 +149,6 @@ nnoremap <A-j> J
 " Vertical Movement
 noremap J <C-d>zz
 noremap K <C-u>zz
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
 
 " Jump to start and end of line using the home row keys
 map H ^
@@ -223,24 +219,25 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- vim.keymap.set("n", "<leader>E", vim.diagnostic.goto_prev, {buffer=0})
 -- vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer=0})
 
-require('lspconfig')['tsserver'].setup{
-    capabilities = capabilities,
-    on_attach = on_attach,
-    flags = lsp_flags,
+require'lspconfig'.tsserver.setup{
+    --capabilities = capabilities,
+    --on_attach = on_attach,
+    --flags = lsp_flags,
 }
-require('lspconfig')['rust_analyzer'].setup{
-    capabilities = capabilities,
-    on_attach = on_attach,
-    flags = lsp_flags,
-    settings = {
-      ["rust-analyzer"] = {}
-    }
+require'lspconfig'.rust_analyzer.setup{
+    --capabilities = capabilities,
+    --on_attach = on_attach,
+    --flags = lsp_flags,
+    --settings = {
+    --  ["rust-analyzer"] = {}
+    --}
 }
-require('lspconfig')['pyright'].setup{
-    capabilities = capabilities,
-    on_attach = on_attach,
-    flags = lsp_flags,
+require'lspconfig'.pyright.setup{
+    --capabilities = capabilities,
+    --on_attach = on_attach,
+    --flags = lsp_flags,
 }
+require'lspconfig'.svelte.setup{}
 
 -- Set up nvim-cmp.
 local cmp = require'cmp'
