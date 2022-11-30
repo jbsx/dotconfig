@@ -134,7 +134,7 @@ bindsym --release $mod+Shift+d exec rofi -modi "clipboard:greenclip print" -show
 #bindsym --release $mod+space exec $HOME/.scripts/Rofi-FzF
 
 # Rofi-Spotlight
-bindsym --release $mod+space exec rofi -modi "Global Search":"$HOME/.config/rofi/rofi-spotlight.sh" -show "Global Search" -config $HOME/.config/rofi/rofi.rasi
+#bindsym --release $mod+space exec rofi -modi "Global Search":"$HOME/.config/rofi/rofi-spotlight.sh" -show "Global Search" -config $HOME/.config/rofi/rofi.rasi
 
 #Screenshots
 # Multi-screen screenshots with scrot
@@ -144,8 +144,10 @@ bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~
 bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
 
 # Change Resolution and load wallpaper
-exec xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync && xrandr --addmode eDP-1-1 1920x1080_60.00 && xrandr --output eDP-1-1 --mode 1920x1080_60.00 && nitrogen --restore && redshift -P -O 3600
-#exec xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync && xrandr --addmode eDP-1 1920x1080_60.00 && xrandr --output eDP-1 --mode 1920x1080_60.00 && nitrogen --restore && redshift -P -O 3600
+exec $HOME/.scripts/chngres.sh
+
+#wallpaper and redshift
+exec nitrogen --restore && redshift -P -O 3600
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -286,16 +288,16 @@ bindsym $mod+r mode "resize"
 #exex_always --no-startup-id xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync && xrandr --output eDP-1 --mode 1920x1080_60.00
 
 #autostart app in workspaces
-exec /usr/bin/firefox
+exec /usr/bin/firefox-developer-edition
 exec /usr/bin/alacritty
-exec LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
+#exec LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
 # application rules
         # Alacritty
                 assign [class="Alacritty"] → $ws2
         # Firefox
-                assign [class="Firefox"] → $ws1
+                assign [class="Firefox Developer Edition"] → $ws1
         # Spotify
-                for_window [class="Spotify"] move to workspace $ws3
+                #for_window [class="Spotify"] move to workspace $ws3
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec greenclip daemon

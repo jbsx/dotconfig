@@ -11,6 +11,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
 "Editor
 Plug 'junegunn/fzf'
@@ -111,6 +112,7 @@ if exists('g:started_by_firenvim')
     let fc['https?://leetcode.com/'] = { 'takeover': 'always', 'priority': 1 }
 endif
 
+
 " ################## KEY MAPS ##################
 
 let mapleader = "\<Space>"
@@ -159,7 +161,7 @@ map L $
 inoremap jj <esc>
 nnoremap <leader><leader> <C-^>
 inoremap <esc> <C-o>:echo "NO ESAPCE FOR YOU"<CR>
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-n> :silent! NERDTreeToggle<CR>
 
 inoremap <C-H> <C-w>
 
@@ -178,7 +180,7 @@ nnoremap <right> :bn<CR>
 " FZF
 nnoremap <leader>ff :FZF<CR>
 " fg = grep (ripgrep)
-nnoremap <leader>fr :Rg<CR>
+nnoremap <leader>r :Rg<CR>
 " fb = BLines
 nnoremap <leader>fb :BLines<CR>
 " t = buffers
@@ -202,9 +204,10 @@ nmap gd :lua vim.lsp.buf.definition() <CR>
 nmap gt :lua vim.lsp.buf.type_definition() <CR>
 nmap gi :lua vim.lsp.buf.implementation() <CR>
 nmap <leader>o :lua vim.diagnostic.open_float() <CR>
-nmap <leader>e :lua vim.diagnostic.goto_next() <CR>
-nmap <leader>E :lua vim.diagnostic.goto_prev() <CR>
-nmap <leader>r :lua vim.lsp.buf.rename() <CR>
+nmap <A-e> :lua vim.diagnostic.goto_next() <CR>
+nmap <A-E> :lua vim.diagnostic.goto_prev() <CR>
+nmap <leader>2 :lua vim.lsp.buf.rename() <CR>
+nmap <A-p> :ToggleDiag <CR>
 
 " LSP
 
@@ -234,11 +237,6 @@ require('lspconfig')['rust_analyzer'].setup{
     }
 }
 require('lspconfig')['pyright'].setup{
-    capabilities = capabilities,
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-require('lspconfig')['svelte'].setup{
     capabilities = capabilities,
     on_attach = on_attach,
     flags = lsp_flags,
@@ -276,4 +274,5 @@ cmp.setup({
     { name = 'buffer' },
   })
 })
+
 EOF

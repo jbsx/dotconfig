@@ -53,6 +53,10 @@ export PATH=$PATH:$HOME/.local/bin/
 # GO
 export PATH=$PATH:/usr/local/go/bin
 
+# Aliases
+alias m="mpv --shuffle 'https://www.youtube.com/playlist?list=PLm323Lc7iSW9oSIDihesMJXmMNfh8U59k' --no-video"
+alias top="bashtop"
+
 #________________________________________________________________________________________________________________
 
 # Path to the bash it configuration
@@ -131,4 +135,3 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
-export PATH=$PATH:/home/jbsx/.spicetify
