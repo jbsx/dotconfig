@@ -1,8 +1,6 @@
 set shell=/bin/bash
 call plug#begin('~/.config/nvim/plugged')
 
-" Nvim configuration
-
 "LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -31,11 +29,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'gruvbox-community/gruvbox'
 Plug 'folke/tokyonight.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-    "Svelte syntax highlighting
-    Plug 'othree/html5.vim'
-    Plug 'pangloss/vim-javascript'
-    Plug 'evanleck/vim-svelte', {'branch': 'main'}
-
 
 call plug#end()
 
@@ -147,8 +140,8 @@ nnoremap <A-k> K
 nnoremap <A-j> J
 
 " Vertical Movement
-noremap J <C-d>zz
-noremap K <C-u>zz
+noremap J <C-d>
+noremap K <C-u>
 
 " Jump to start and end of line using the home row keys
 map H ^
@@ -206,40 +199,39 @@ nmap <leader>2 :lua vim.lsp.buf.rename() <CR>
 nmap <A-p> :ToggleDiag <CR>
 
 " LSP
-
 lua << EOF
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, {buffer=0})
--- vim.keymap.set("n", "gd", vim.lsp.buf.definition, {buffer=0})
--- vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, {buffer=0})
--- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {buffer=0})
--- vim.keymap.set("n", "<leader>o", vim.diagnostic.open_float, {buffer=0})
--- vim.keymap.set("n", "<leader>e", vim.diagnostic.goto_next, {buffer=0})
--- vim.keymap.set("n", "<leader>E", vim.diagnostic.goto_prev, {buffer=0})
--- vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer=0})
+-----------------------Treesitter-----------------------
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  }
+}
 
-require'lspconfig'.tsserver.setup{
-    --capabilities = capabilities,
-    --on_attach = on_attach,
-    --flags = lsp_flags,
-}
-require'lspconfig'.rust_analyzer.setup{
-    --capabilities = capabilities,
-    --on_attach = on_attach,
-    --flags = lsp_flags,
-    --settings = {
-    --  ["rust-analyzer"] = {}
-    --}
-}
-require'lspconfig'.pyright.setup{
-    --capabilities = capabilities,
-    --on_attach = on_attach,
-    --flags = lsp_flags,
-}
+---------------------LSPconfig setup--------------------
+require'lspconfig'.tsserver.setup{ }
+require'lspconfig'.rust_analyzer.setup{ }
+require'lspconfig'.pyright.setup{ }
 require'lspconfig'.svelte.setup{}
 
--- Set up nvim-cmp.
+---------------------Set up nvim-cmp--------------------
 local cmp = require'cmp'
 
 cmp.setup({
