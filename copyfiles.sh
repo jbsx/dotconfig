@@ -4,10 +4,11 @@ cp -r $HOME/.config/i3/ ./
 cp -r $HOME/.config/polybar/ ./
 cp -r $HOME/.config/rofi/ ./
 cp -r $HOME/.config/mpv/ ./
-cp -r $HOME/.alacritty.yml ./
-cp -r $HOME/.bashrc ./
-cp -r $HOME/.bash_profile ./
-cp -r $HOME/.tmux.conf ./
 cp -r $HOME/.scripts ./
+cp $HOME/.alacritty.yml ./
+cp $HOME/.bashrc ./
+cp $HOME/.bash_profile ./
+cp $HOME/.tmux.conf ./
 cp $HOME/.config/greenclip.toml ./
 cp $HOME/.xbindkeysrc ./
+cp $HOME/.clang-format ./
