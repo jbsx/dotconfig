@@ -146,8 +146,11 @@ bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'm
 # Change Resolution and load wallpaper
 exec $HOME/.scripts/chngres.sh
 
-#wallpaper and redshift
-exec nitrogen --restore && redshift -P -O 3600
+# Wallpaper
+exec nitrogen --restore
+
+# Redshift
+exec redshift -P -O 3600
 
 # focus the child container
 #bindsym $mod+d focus child

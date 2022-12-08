@@ -53,6 +53,10 @@ export PATH=$PATH:$HOME/.local/bin/
 # GO
 export PATH=$PATH:/usr/local/go/bin
 
+# Keyboard layouts
+alias asdf="setxkbmap ru"
+alias фыва="setxkbmap us"
+
 # Aliases
 alias m="mpv --shuffle 'https://www.youtube.com/playlist?list=PLm323Lc7iSW9oSIDihesMJXmMNfh8U59k' --no-video"
 alias top="bashtop"
