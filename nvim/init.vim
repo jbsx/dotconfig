@@ -41,8 +41,10 @@ let g:tokyonight_enable_italic = 1
 colorscheme gruvbox
 "colorscheme tokyonight-night
 
-" Remove colorscheme background
+" Remove background
 hi Normal guibg=NONE ctermbg=None
+hi cursorline guibg=NONE ctermbg=None
+hi CursorLineNR ctermbg=NONE
 
 " luochen1990/rainbow
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -112,30 +114,6 @@ let g:neoformat_enabled_typescript = ['prettier']
 
 let mapleader = "\<Space>"
 
-" Ctrl+j and Ctrl+k as Esc
-" Ctrl-j is a little awkward unfortunately:
-" https://github.com/neovim/neovim/issues/5916
-" So we also map Ctrl+k
-nnoremap <C-j> <Esc>
-inoremap <C-j> <Esc>
-vnoremap <C-j> <Esc>
-snoremap <C-j> <Esc>
-xnoremap <C-j> <Esc>
-cnoremap <C-j> <C-c>
-onoremap <C-j> <Esc>
-lnoremap <C-j> <Esc>
-tnoremap <C-j> <Esc>
-
-nnoremap <C-k> <Esc>
-inoremap <C-k> <Esc>
-vnoremap <C-k> <Esc>
-snoremap <C-k> <Esc>
-xnoremap <C-k> <Esc>
-cnoremap <C-k> <C-c>
-onoremap <C-k> <Esc>
-lnoremap <C-k> <Esc>
-tnoremap <C-k> <Esc>
-
 " move line
 map <A-J> :m +1<CR>
 map <A-K> :m -2<CR>
@@ -145,8 +123,8 @@ nnoremap <A-k> K
 nnoremap <A-j> J
 
 " Vertical Movement
-noremap J <C-d>zz
-noremap K <C-u>zz
+noremap J <C-d>
+noremap K <C-u>
 
 " Jump to start and end of line using the home row keys
 map H ^
@@ -197,11 +175,14 @@ nmap <leader>k :lua vim.lsp.buf.hover() <CR>
 nmap gd :lua vim.lsp.buf.definition() <CR>
 nmap gt :lua vim.lsp.buf.type_definition() <CR>
 nmap gi :lua vim.lsp.buf.implementation() <CR>
+nmap gr :lua vim.lsp.buf.references() <CR>
+nmap <leader>q :lua vim.diagnostic.setloclist() <CR>
 nmap <leader>o :lua vim.diagnostic.open_float() <CR>
 nmap <A-e> :lua vim.diagnostic.goto_next() <CR>
 nmap <A-E> :lua vim.diagnostic.goto_prev() <CR>
 nmap <leader>2 :lua vim.lsp.buf.rename() <CR>
 nmap <A-p> :ToggleDiag <CR>
+nmap <leader>ca :lua vim.lsp.buf.code_action() <CR>
 
 "-------------------------Vsnip-------------------------
 " Expand
@@ -271,10 +252,9 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
+    { name = 'vsnip' },
+    -- hrsh7th/cmp-nvim-lsp-signature-help
+    { name = 'nvim_lsp_signature_help' }
     }, {
         { name = 'buffer' },
     })
