@@ -85,8 +85,8 @@ set nowrap
 " Firenvim settings
 if exists('g:started_by_firenvim')
     set guifont=LiterationMono\ Nerd\ Font:h12
-    highlight ExtraWhitespace guibg=NONE ctermbg=NONE
-    colorscheme tokyonight-night
+    colorscheme gruvbox
+    "highlight ExtraWhitespace guibg=NONE ctermbg=NONE
     let g:firenvim_config = { 
         \ 'globalSettings': {
             \ 'alt': 'all',
@@ -112,7 +112,7 @@ let g:neoformat_enabled_typescript = ['prettier']
 
 " ################## KEY MAPS ##################
 
-let mapleader = "\<Space>"
+"let mapleader = "\<Space>"
 
 " move line
 map <A-J> :m +1<CR>
@@ -132,6 +132,9 @@ map L $
 
 inoremap jj <esc>
 nnoremap <leader><leader> <C-^>
+
+" switch brackets
+nnoremap <leader>[ %
 "inoremap <esc> <C-o>:echo "NO ESAPCE FOR YOU"<CR>
 nnoremap <C-n> :silent! NERDTreeToggle<CR>
 
@@ -148,6 +151,8 @@ inoremap <right> <nop>
 " Left and right can switch buffers
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
+nnoremap <A-P> :bp<CR>
+nnoremap <A-N> :bn<CR>
 
 " FZF
 nnoremap <leader>ff :FZF<CR>
@@ -293,6 +298,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require'lspconfig'.tsserver.setup{capabilities = capabilities}
 require'lspconfig'.rust_analyzer.setup{capabilities = capabilities}
+require'lspconfig'.gopls.setup{capabilities = capabilities}
 require'lspconfig'.pyright.setup{capabilities = capabilities}
 require'lspconfig'.svelte.setup{capabilities = capabilities}
 require'lspconfig'.clangd.setup{capabilities = capabilities}
