@@ -20,15 +20,12 @@ Plug 'tpope/vim-sensible'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 "MISCELLANEOUS
-Plug 'preservim/nerdtree'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'sbdchd/neoformat'
 Plug 'luochen1990/rainbow'
 Plug 'sheerun/vim-polyglot'
 Plug 'gruvbox-community/gruvbox'
-Plug 'folke/tokyonight.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
@@ -39,7 +36,6 @@ let g:tokyonight_style = 'night'
 let g:tokyonight_enable_italic = 1
 
 colorscheme gruvbox
-"colorscheme tokyonight-night
 
 " Remove background
 hi Normal guibg=NONE ctermbg=None
@@ -48,21 +44,6 @@ hi CursorLineNR ctermbg=NONE
 
 " luochen1990/rainbow
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
-
-" lightline
-let g:lightline = {
-      \ 'colorscheme': 'powerline',
-      \ 'active': {
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ],
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
-      \ },
-      \ }
 
 " Autocomplete
 set completeopt=menu,menuone,noselect
@@ -84,9 +65,8 @@ set nowrap
 
 " Firenvim settings
 if exists('g:started_by_firenvim')
-    set guifont=LiterationMono\ Nerd\ Font:h12
     colorscheme gruvbox
-    "highlight ExtraWhitespace guibg=NONE ctermbg=NONE
+    set guifont=LiterationMono\ Nerd\ Font:h12
     let g:firenvim_config = { 
         \ 'globalSettings': {
             \ 'alt': 'all',
@@ -109,14 +89,13 @@ endif
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_typescript = ['prettier']
 
-
 " ################## KEY MAPS ##################
 
-"let mapleader = "\<Space>"
+let mapleader = "\<Space>"
 
 " move line
-map <A-J> :m +1<CR>
-map <A-K> :m -2<CR>
+map <A-J> :m '>+1<CR>gv=gv
+map <A-K> :m '<-2<CR>gv=gv
 
 " remapping J and K to free keybinds for vertical scroll
 nnoremap <A-k> K
@@ -136,7 +115,6 @@ nnoremap <leader><leader> <C-^>
 " switch brackets
 nnoremap <leader>[ %
 "inoremap <esc> <C-o>:echo "NO ESAPCE FOR YOU"<CR>
-nnoremap <C-n> :silent! NERDTreeToggle<CR>
 
 inoremap <C-H> <C-w>
 
@@ -162,6 +140,9 @@ nnoremap <leader>r :Rg<CR>
 nnoremap <leader>fb :BLines<CR>
 " t = buffers
 nnoremap <leader>t :Buf<CR>
+
+"Netrw
+nnoremap go :Ex<CR>
 
 " Quick-save and prettier
 map <leader>w :Neoformat \| w<CR>
@@ -295,6 +276,7 @@ cmp.setup.cmdline(':', {
 ---------------------LSPconfig setup--------------------
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true --cssls
 
 require'lspconfig'.tsserver.setup{capabilities = capabilities}
 require'lspconfig'.rust_analyzer.setup{capabilities = capabilities}
@@ -302,5 +284,6 @@ require'lspconfig'.gopls.setup{capabilities = capabilities}
 require'lspconfig'.pyright.setup{capabilities = capabilities}
 require'lspconfig'.svelte.setup{capabilities = capabilities}
 require'lspconfig'.clangd.setup{capabilities = capabilities}
+require'lspconfig'.cssls.setup {capabilities = capabilities}
 
 EOF

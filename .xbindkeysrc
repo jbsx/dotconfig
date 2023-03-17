@@ -73,6 +73,13 @@
 "playerctl --player=firefox play-pause"
   b:8
 
+# toggle keyboard layout
+"setxkbmap us"
+  Mod1+Shift+1
+
+"setxkbmap ru"
+  Mod1+Shift+2
+
 #"xterm -geom 50x20+20+20"
 #   Shift+Mod2+alt + s
 #

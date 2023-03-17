@@ -144,10 +144,7 @@ bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~
 bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
 
 # Change Resolution and load wallpaper
-exec $HOME/.scripts/chngres.sh
-
-# Wallpaper
-exec nitrogen --restore
+exec $HOME/.scripts/chngres.sh && nitrogen --restore
 
 # Redshift
 exec redshift -P -O 3600
@@ -210,24 +207,24 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
+    bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
+# same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
+# back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -237,47 +234,47 @@ bindsym $mod+r mode "resize"
 
 #____________________________________________________________________
 # Gaps
-       gaps inner 2
-       gaps outer 0
-       
-       smart_gaps on
-       
-       # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
-       set $mode_gaps Gaps: (o) outer, (i) inner
-       set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-       set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-       bindsym $mod+Shift+g mode "$mode_gaps"
-       
-       mode "$mode_gaps" {
-               bindsym o      mode "$mode_gaps_outer"
-               bindsym i      mode "$mode_gaps_inner"
-               bindsym Return mode "default"
-               bindsym Escape mode "default"
-       }
-       mode "$mode_gaps_inner" {
-               bindsym plus  gaps inner current plus 5
-               bindsym minus gaps inner current minus 5
-               bindsym 0     gaps inner current set 0
-       
-               bindsym Shift+plus  gaps inner all plus 5
-               bindsym Shift+minus gaps inner all minus 5
-               bindsym Shift+0     gaps inner all set 0
-       
-               bindsym Return mode "default"
-               bindsym Escape mode "default"
-       }
-       mode "$mode_gaps_outer" {
-               bindsym plus  gaps outer current plus 5
-               bindsym minus gaps outer current minus 5
-               bindsym 0     gaps outer current set 0
-       
-               bindsym Shift+plus  gaps outer all plus 5
-               bindsym Shift+minus gaps outer all minus 5
-               bindsym Shift+0     gaps outer all set 0
-       
-               bindsym Return mode "default"
-               bindsym Escape mode "default"
-       }
+gaps inner 2
+gaps outer 0
+
+smart_gaps on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+    bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+    bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+    bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 #____________________________________________________________________
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -294,14 +291,16 @@ bindsym $mod+r mode "resize"
 exec /usr/bin/firefox-developer-edition
 exec /usr/bin/alacritty
 exec LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
+
 # application rules
-        # Alacritty
-                assign [class="Alacritty"] → $ws2
-        # Firefox
-                assign [class="Firefox Developer Edition"] → $ws1
-        # Spotify
-                for_window [class="Spotify"] move to workspace $ws3
+# Firefox
+assign [class="Firefox Developer Edition"] → $ws1
+# Alacritty
+assign [class="Alacritty"] → $ws2
+# Spotify
+for_window [class="Spotify"] move to workspace $ws3
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec greenclip daemon
 exec xbindkeys
+exec picom
