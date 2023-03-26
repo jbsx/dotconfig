@@ -21,7 +21,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 "MISCELLANEOUS
 Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'
 Plug 'sbdchd/neoformat'
 Plug 'luochen1990/rainbow'
 Plug 'sheerun/vim-polyglot'
@@ -133,7 +132,9 @@ nnoremap <A-P> :bp<CR>
 nnoremap <A-N> :bn<CR>
 
 " FZF
-nnoremap <leader>ff :FZF<CR>
+"nnoremap <leader>ff :FZF<CR>
+"nnoremap <leader>ff :GFiles<CR>
+nnoremap <leader>ff :Files<CR>
 " fg = grep (ripgrep)
 nnoremap <leader>r :Rg<CR>
 " fb = BLines
