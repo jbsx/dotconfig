@@ -56,7 +56,7 @@ set mouse=a
 set cursorline
 syntax enable
 filetype off
-"filetype plugin indent on
+filetype plugin indent on
 set encoding=utf-8
 set tabstop=4 softtabstop=4
 set shiftwidth=4
