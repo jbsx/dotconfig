@@ -18,6 +18,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-sensible'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'mbbill/undotree'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 
 "MISCELLANEOUS
 Plug 'vim-airline/vim-airline'
@@ -25,6 +28,7 @@ Plug 'sbdchd/neoformat'
 Plug 'luochen1990/rainbow'
 Plug 'sheerun/vim-polyglot'
 Plug 'gruvbox-community/gruvbox'
+Plug 'folke/tokyonight.nvim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
@@ -37,9 +41,9 @@ let g:tokyonight_enable_italic = 1
 colorscheme gruvbox
 
 " Remove background
-hi Normal guibg=NONE ctermbg=None
-hi cursorline guibg=NONE ctermbg=None
-hi CursorLineNR ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=None
+"hi cursorline guibg=NONE ctermbg=None
+"hi CursorLineNR ctermbg=NONE
 
 " luochen1990/rainbow
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -51,7 +55,8 @@ set number relativenumber
 set mouse=a
 set cursorline
 syntax enable
-filetype plugin indent on
+filetype off
+"filetype plugin indent on
 set encoding=utf-8
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -87,6 +92,26 @@ endif
 " Neoformat
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_typescript = ['prettier']
+
+" Limelight
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+" Number of preceding/following paragraphs to include (default: 0)
+let g:limelight_paragraph_span = 2
+" Beginning/end of paragraph
+"   When there's no empty line between the paragraphs
+"   and each paragraph starts with indentation
+let g:limelight_bop = '^\s'
+let g:limelight_eop = '\ze\n^\s'
+" Highlighting priority (default: 10)
+"   Set it to -1 not to overrule hlsearch
+let g:limelight_priority = -1
 
 " ################## KEY MAPS ##################
 
@@ -131,6 +156,9 @@ nnoremap <right> :bn<CR>
 nnoremap <A-P> :bp<CR>
 nnoremap <A-N> :bn<CR>
 
+" Close buffer
+nnoremap <A-d> :bd<CR>
+
 " FZF
 "nnoremap <leader>ff :FZF<CR>
 "nnoremap <leader>ff :GFiles<CR>
@@ -142,8 +170,14 @@ nnoremap <leader>fb :BLines<CR>
 " t = buffers
 nnoremap <leader>t :Buf<CR>
 
+"undotree
+nnoremap <A-u> :UndotreeToggle<CR>
+
 "Netrw
 nnoremap go :Ex<CR>
+
+"nerdtree
+nnoremap <C-n> :NERDTreeToggle<CR>
 
 " Quick-save and prettier
 map <leader>w :Neoformat \| w<CR>
@@ -277,7 +311,7 @@ cmp.setup.cmdline(':', {
 ---------------------LSPconfig setup--------------------
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true --cssls
+capabilities.textDocument.completion.completionItem.snippetSupport = true --cssls, jsonls
 
 require'lspconfig'.tsserver.setup{capabilities = capabilities}
 require'lspconfig'.rust_analyzer.setup{capabilities = capabilities}
@@ -286,5 +320,18 @@ require'lspconfig'.pyright.setup{capabilities = capabilities}
 require'lspconfig'.svelte.setup{capabilities = capabilities}
 require'lspconfig'.clangd.setup{capabilities = capabilities}
 require'lspconfig'.cssls.setup {capabilities = capabilities}
+require'lspconfig'.jsonls.setup {capabilities = capabilities}
+require'lspconfig'.prismals.setup{capabilities = capabilities}
+require'lspconfig'.html.setup {capabilities = capabilities}
+require'lspconfig'.solidity.setup{capabilities = capabilities}
+require'lspconfig'.texlab.setup{capabilities = capabilities}
+require'lspconfig'.astro.setup({
+capabilities = capabilities,
+  init_options = {
+    typescript = {
+      tsdk = vim.fs.normalize('/usr/lib/node_modules/typescript/lib')
+    }
+  },
+})
 
 EOF

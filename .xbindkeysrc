@@ -68,10 +68,12 @@
 # MOUSE BUTTON KEYMAPS
 "xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
   b:9
+"echo (.)(.)"
+  b:8
 
 #"xte 'keydown Super_L' 'keydown 2' 'keyup Super_L' 'keyup 2'"
-"playerctl --player=firefox play-pause"
-  b:8
+#"playerctl --player=firefox play-pause"
+#  b:8
 
 # toggle keyboard layout
 "setxkbmap us"
