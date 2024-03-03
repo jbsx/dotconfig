@@ -12,18 +12,20 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { 
+    {
         "ellisonleao/gruvbox.nvim",
-        priority = 1000 ,
+        priority = 1000,
         config = function()
             vim.o.background = "dark" -- or "light" for light mode
             vim.cmd([[colorscheme gruvbox]])
+            vim.cmd([[hi Normal guibg=NONE ctermbg=None]])
+            vim.cmd([[hi cursorline guibg=NONE ctermbg=None]])
+            vim.cmd([[hi CursorLineNR ctermbg=NONE]])
         end
     },
     "itchyny/lightline.vim",
 
     "tpope/vim-sensible",
-    "sbdchd/neoformat",
 
     "neovim/nvim-lspconfig",
     {
@@ -44,5 +46,18 @@ require("lazy").setup({
     'hrsh7th/nvim-cmp',
     'hrsh7th/vim-vsnip',
 
-    "glacambre/firenvim"
+    'airblade/vim-rooter',
+
+    'stevearc/conform.nvim',
+
+    {
+        'glacambre/firenvim',
+
+        -- Lazy load firenvim
+        -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+        lazy = not vim.g.started_by_firenvim,
+        build = function()
+            vim.fn["firenvim#install"](0)
+        end
+    }
 })

@@ -74,4 +74,4 @@ program = "/usr/bin/tmux"
 
 [window]
 decorations = "none"
-opacity = 0.95
+opacity = 0.9

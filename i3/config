@@ -310,3 +310,4 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec greenclip daemon
 exec xbindkeys
 exec picom
+exec blueman-applet
