@@ -2,7 +2,7 @@
 vim.g.mapleader = ' '
 vim.keymap.set('n', 'go', vim.cmd.Ex)
 vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
-vim.keymap.set('i', 'jj', '<esc>')
+--vim.keymap.set('i', 'jj', '<esc>')
 
 ------------------------UndoTree-----------------------
 vim.keymap.set('n', '<A-u>', vim.cmd.UndotreeToggle)
@@ -14,15 +14,18 @@ vim.keymap.set({ 'n', 'x' }, '<leader>P', '\"+P')
 vim.keymap.set({ 'n', 'x' }, '<leader>Y', '\"+Y')
 
 ------------------------Movement-----------------------
-vim.keymap.set('n', '<A-j>', '<C-d>')
-vim.keymap.set('n', '<A-k>', '<C-u>')
-vim.keymap.set({ 'n', 'x' }, '<A-h>', '^')
-vim.keymap.set({ 'n', 'x' }, '<A-l>', '$')
+--vim.keymap.set({ 'n', 'x' }, '<A-j>', '<C-d>')
+--vim.keymap.set({ 'n', 'x' }, '<A-k>', '<C-u>')
+--vim.keymap.set({ 'n', 'x' }, '<A-h>', '^')
+--vim.keymap.set({ 'n', 'x' }, '<A-l>', '$')
 
---vim.keymap.set({'n', 'x'}, 'J', '<C-d>')
---vim.keymap.set({'n', 'x'}, 'K', '<C-u>')
---vim.keymap.set({'n', 'x'}, 'H', '^')
---vim.keymap.set({'n', 'x'}, 'L', '$')
+vim.keymap.set({ 'n', 'x' }, '<A-j>', 'J')
+vim.keymap.set({ 'n', 'x' }, '<A-k>', 'K')
+
+vim.keymap.set({ 'n', 'x' }, 'J', '<C-d>')
+vim.keymap.set({ 'n', 'x' }, 'K', '<C-u>')
+vim.keymap.set({ 'n', 'x' }, 'H', '^')
+vim.keymap.set({ 'n', 'x' }, 'L', '$')
 
 -----------------------Telescope-----------------------
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
@@ -56,7 +59,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local opts = { buffer = ev.buf }
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', '<A-k>', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, opts)
         vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
         --vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)

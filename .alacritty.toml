@@ -23,7 +23,7 @@ background = "0x151515"
 foreground = "0xdfbf8e"
 
 [font]
-size = 12
+size = 14
 
 [font.normal]
 family = "LiterationMono Nerd Font"
@@ -74,4 +74,4 @@ program = "/usr/bin/tmux"
 
 [window]
 decorations = "none"
-opacity = 0.9
+opacity = 0.90
