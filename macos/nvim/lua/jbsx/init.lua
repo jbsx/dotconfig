@@ -1,0 +1,8 @@
+require("jbsx.set")
+require("jbsx.lazy")
+require("jbsx.remap")
+require("jbsx.lsp")
+require("jbsx.treesitter")
+require("jbsx.cmp")
+require("jbsx.firenvim")
+require("jbsx.formatter")

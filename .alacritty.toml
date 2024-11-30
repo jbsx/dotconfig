@@ -23,7 +23,7 @@ background = "0x151515"
 foreground = "0xdfbf8e"
 
 [font]
-size = 14
+size = 19
 
 [font.normal]
 family = "LiterationMono Nerd Font"
