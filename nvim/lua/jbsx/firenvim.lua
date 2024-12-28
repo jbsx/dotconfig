@@ -14,9 +14,18 @@ vim.g.firenvim_config = {
     }
 }
 
-vim.api.nvim_create_autocmd({'BufEnter'}, {
-    pattern = {"leetcode.com_*.txt"},
-    callback = function ()
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+    pattern = { "leetcode.com_*.txt" },
+    callback = function(args)
         vim.opt.filetype = "python"
+        vim.cmd([[colorscheme gruvbox]])
+        vim.lsp.get_client_by_id(args.data.client_id).stop()
+    end
+})
+
+vim.api.nvim_create_autocmd({ 'LspAttach' }, {
+    pattern = { "leetcode.com_*.txt" },
+    callback = function(args)
+        vim.lsp.get_client_by_id(args.data.client_id).stop()
     end
 })
