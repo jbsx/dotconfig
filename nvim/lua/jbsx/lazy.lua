@@ -50,6 +50,8 @@ require("lazy").setup({
 
     'stevearc/conform.nvim',
 
+    --{ 'glacambre/firenvim', build = ":call firenvim#install(0)" }
+
     {
         'glacambre/firenvim',
 
