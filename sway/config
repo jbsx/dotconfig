@@ -48,6 +48,12 @@ font pango:LiterationMono Nerd Font 8
 #
 output eDP-1 bg /home/jbsx/Pictures/musashi.jpg fill
 
+# Move Current workspace to the laptop monitor
+bindsym $mod+Shift+Y exec swaymsg "workspace $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true).name'); move workspace to output eDP-1"
+# Move Current workspace to the external monitor
+bindsym $mod+Shift+T exec swaymsg "workspace $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true).name'); move workspace to output DP-1"
+
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
