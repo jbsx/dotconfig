@@ -5,6 +5,7 @@ cp -r $HOME/.config/sway/ ./
 cp -r $HOME/.config/waybar/ ./
 cp -r $HOME/.config/i3/ ./
 cp -r $HOME/.config/polybar/ ./
+cp -r $HOME/.config/wofi/ ./
 
 cp -r $HOME/.config/rofi/ ./
 cp -r $HOME/.config/mpv/ ./

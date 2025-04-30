@@ -14,9 +14,12 @@ input type:keyboard {
 # Natural Scroll
 input type:touchpad {
     natural_scroll enabled
+    dwt enabled
     tap enabled
-    accel_profile "adaptive"
     pointer_accel 0.3
+    middle_emulation enabled
+    accel_profile adaptive
+    scroll_method two_finger
 }
 
 # hide borders when one window in workspace
@@ -64,6 +67,17 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause && $refresh_i3st
 bindsym XF86AudioNext exec --no-startup-id playerctl next && $refresh_i3status
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous && $refresh_i3status
 bindsym XF86AudioStop exec --no-startup-id playerctl stop && $refresh_i3status
+
+#remapping useless buttons on the thinkpad keyboard
+bindsym XF86Favorites exec grim - "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"
+#bindsym Shift+XF86Favorites exec grim -g "$(slurp)" "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"
+bindsym XF86PickupPhone exec --no-startup-id playerctl next && $refresh_i3status
+bindsym XF86HangupPhone exec --no-startup-id playerctl previous && $refresh_i3status
+bindsym XF86NotificationCenter exec --no-startup-id playerctl stop && $refresh_i3status
+
+#Screenshots
+bindsym $mod+p exec grim "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"
+bindsym $mod+Shift+p exec grim -g "$(slurp)" "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"
 
 # Brightness
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
@@ -113,7 +127,8 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    #bindsym $mod+d exec $menu
+    bindsym $mod+d exec wofi --show drun
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -129,7 +144,7 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
     # Sleep
-    bindsym $mod+Shift+p exec systemctl suspend && swaylock -i $HOME/Pictures/musashi.jpg
+    bindsym $mod+Shift+o exec systemctl suspend && swaylock -i $HOME/Pictures/musashi.jpg
 
 #
 # Moving around:
@@ -244,6 +259,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+#see https://github.com/swaywm/sway/issues/5732
+exec systemctl --user import-environment
+
 #
 # Status Bar:
 #
@@ -279,3 +297,6 @@ for_window [class="Spotify"] move to workspace number 3
 
 exec waybar
 exec blueman-applet
+
+#configure external monitor
+exec $HOME/.scripts/configure_external_monitor.sh
