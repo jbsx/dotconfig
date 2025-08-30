@@ -3,7 +3,12 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lspconfig.pyright.setup { capabilities = capabilities }
 lspconfig.ts_ls.setup { capabilities = capabilities }
-lspconfig.rust_analyzer.setup { capabilities = capabilities }
+lspconfig.rust_analyzer.setup { 
+    capabilities = capabilities,
+    cargo = {
+        features = "all"
+    }
+}
 lspconfig.gopls.setup { capabilities = capabilities }
 lspconfig.svelte.setup { capabilities = capabilities }
 lspconfig.clangd.setup { capabilities = capabilities }

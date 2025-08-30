@@ -47,14 +47,17 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 # is used in the bar {} block below.
 font pango:LiterationMono Nerd Font 8
 
+#clipboard
+exec wl-paste --watch cliphist store
+bindsym $mod+Shift+d exec cliphist list | wofi -S dmenu | cliphist decode | wl-copy
+
 ### Output configuration
 #
 output eDP-1 bg /home/jbsx/Pictures/musashi.jpg fill
 
-# Move Current workspace to the laptop monitor
-bindsym $mod+Shift+Y exec swaymsg "workspace $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true).name'); move workspace to output eDP-1"
-# Move Current workspace to the external monitor
-bindsym $mod+Shift+T exec swaymsg "workspace $(swaymsg -t get_workspaces | jq -r '.[] | select(.focused==true).name'); move workspace to output DP-1"
+# move workspace between monitors
+bindsym $mod+greater move workspace to output right
+bindsym $mod+less move workspace to output left
 
 
 # Use pactl to adjust volume in PulseAudio.
@@ -77,7 +80,7 @@ bindsym XF86NotificationCenter exec --no-startup-id playerctl stop && $refresh_i
 
 #Screenshots
 bindsym $mod+p exec grim "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"
-bindsym $mod+Shift+p exec grim -g "$(slurp)" "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"
+bindsym $mod+Shift+p exec grim -g "$(slurp)" "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png" | cliphist
 
 # Brightness
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
@@ -285,7 +288,7 @@ exec systemctl --user import-environment
 #autostart app in workspaces
 exec /usr/bin/firefox
 exec $HOME/.cargo/bin/alacritty
-exec LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
+#exec LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
 
 # application rules
 # Firefox

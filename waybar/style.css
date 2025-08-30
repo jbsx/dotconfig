@@ -71,6 +71,7 @@
 @define-color workspaces-urgent-fg @black;
 
 /* Text and border colors for modules */
+/*
 @define-color mode-color @orange;
 @define-color mpd-color @magenta;
 @define-color weather-color @magenta;
@@ -95,13 +96,41 @@
 @define-color quote-color @green;
 @define-color idle-inhibitor-color @foreground;
 @define-color idle-inhibitor-active-color @red;
+*/
+
+@define-color stealth #919191;
+
+@define-color mode-color @stealth;
+@define-color mpd-color @stealth;
+@define-color weather-color @stealth;
+@define-color playerctl-color @stealth;
+@define-color clock-color @stealth;
+@define-color cpu-color @stealth;
+@define-color memory-color @stealth;
+@define-color temperature-color @stealth;
+@define-color temperature-critical-color @stealth;
+@define-color battery-color @stealth;
+@define-color battery-charging-color @stealth;
+@define-color battery-warning-color @stealth;
+@define-color battery-critical-color @stealth;
+@define-color network-color @stealth;
+@define-color network-disconnected-color @stealth;
+@define-color pulseaudio-color @stealth;
+@define-color pulseaudio-muted-color @stealth;
+@define-color backlight-color @stealth;
+@define-color disk-color @stealth;
+@define-color uptime-color @stealth;
+@define-color updates-color @stealth;
+@define-color quote-color @stealth;
+@define-color idle-inhibitor-color @stealth;
+@define-color idle-inhibitor-active-color @stealth;
 
 * {
     /* Base styling for all modules */
     border: none;
     border-radius: 0;
     font-family: "Iosevka Nerd Font";
-    font-size: 14px;
+    font-size: 12px;
     min-height: 0;
 }
 
@@ -117,7 +146,7 @@ window#waybar {
 #memory, #temperature, #battery, #network, #pulseaudio,
 #backlight, #disk, #custom-uptime, #custom-updates, #custom-quote,
 #idle_inhibitor, #tray {
-    padding: 0 10px;
+    padding: 0 5px;
     margin: 0 2px;
     border-bottom: 2px solid transparent;
     background-color: transparent;

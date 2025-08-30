@@ -1,13 +1,14 @@
 {
     "layer": "top",
     "position": "bottom",
-    "height": 22,
+    "height": 12,
     "spacing": 1,
     "margin": 0,
     "modules-left": ["sway/workspaces", "sway/mode"],
         "modules-center": [],                                                                           //battery   //disk     // uptime      //updates        // systray
     //"modules-right": ["pulseaudio", "backlight", "battery", "custom/uptime", "clock", "tray"],
-    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "temperature", "battery", "disk", "custom/uptime", "custom/updates", "clock", "tray"],
+    //"modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "temperature", "battery", "disk", "custom/uptime", "custom/updates", "clock", "tray"],
+    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "temperature", "battery", "clock", "tray"],
 
 
     "sway/workspaces": {
@@ -26,11 +27,6 @@
             "9": "",
             "10": ""
         },
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-        }
     },
 
     "sway/mode": {
@@ -125,6 +121,7 @@
     },
 
     "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 80,
         "format": "{icon} {temperatureC}°C",
         "format-icons": ["󱃃", "󰔏", "󱃂"],
@@ -190,6 +187,6 @@
 
     "tray": {
         "icon-size": 18,
-        "spacing": 5
+        "spacing": 3
     }
 }
