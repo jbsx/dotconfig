@@ -53,7 +53,7 @@ bindsym $mod+Shift+d exec cliphist list | wofi -S dmenu | cliphist decode | wl-c
 
 ### Output configuration
 #
-output eDP-1 bg /home/jbsx/Pictures/musashi.jpg fill
+output HDMI-A-1 bg $HOME/Pictures/wallpapers/kids_see_ghosts.jpg fill
 
 # move workspace between monitors
 bindsym $mod+greater move workspace to output right
@@ -80,7 +80,7 @@ bindsym XF86NotificationCenter exec --no-startup-id playerctl stop && $refresh_i
 
 #Screenshots
 bindsym $mod+p exec grim "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png"
-bindsym $mod+Shift+p exec grim -g "$(slurp)" "$HOME/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png" | cliphist
+bindsym $mod+Shift+p exec grim -g "$(slurp)" "$HOME/Pictures/Screenshots/screenshot-$(date+%Y%m%d-%H%M%S).png" && wl-copy < "$HOME/Pictures/Screenshots/screenshot-$(date+%Y%m%d-%H%M%S).png"
 
 # Brightness
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
@@ -147,7 +147,8 @@ bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
     # Sleep
-    bindsym $mod+Shift+o exec systemctl suspend && swaylock -i $HOME/Pictures/musashi.jpg
+    #bindsym $mod+Shift+o exec systemctl hibernate && swaylock -i /home/jbsx/Pictures/wallpapers/kids_see_ghosts.jpg
+    bindsym $mod+Shift+o exec systemctl hibernate
 
 #
 # Moving around:
@@ -287,19 +288,18 @@ exec systemctl --user import-environment
 
 #autostart app in workspaces
 exec /usr/bin/firefox
-exec $HOME/.cargo/bin/alacritty
-#exec LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
+exec /usr/bin/alacritty
 
 # application rules
 # Firefox
 assign [app_id="Firefox"] workspace number 1
 # Alacritty
 assign [app_id="Alacritty"] workspace number 2
-# Spotify
-for_window [class="Spotify"] move to workspace number 3
 
 exec waybar
 exec blueman-applet
-
+exec mako
+for_window [app_id="pomodoro"] floating enable, sticky enable, border none, move position 96ppt 0ppt
+exec $HOME/Projects/timer/.venv/bin/python3 $HOME/Projects/timer/pomodoro.py
 #configure external monitor
 exec $HOME/.scripts/configure_external_monitor.sh
