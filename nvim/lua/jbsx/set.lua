@@ -31,6 +31,8 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 750
 
+vim.g.vimtex_view_method = "zathura"
+
 --vim.opt.filetype = off
 --vim.opt.filetype = on
 

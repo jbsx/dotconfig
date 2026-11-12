@@ -1,0 +1,16 @@
+#!/bin/sh
+# X11 clipboard history picker (rofi) — companion to clipd.
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist"
+raw="$cache/raw"
+[ -s "$raw" ] || exit 0
+
+# rofi dmenu mode; -format i prints the 0-based index of the chosen line.
+# Preview lines are piped directly (not string-concatenated) so newlines survive.
+idx=$(
+    while IFS= read -r line; do
+        txt=$(printf '%s' "$line" | base64 -d 2>/dev/null | tr '\n\r\t' '   ')
+        printf '%.80s\n' "$txt"
+    done < "$raw" | rofi -dmenu -i -p "Clipboard" -format i
+) || exit 0
+{ [ -n "$idx" ] && [ "$idx" -ge 0 ]; } 2>/dev/null || exit 0
+sed -n "$((idx + 1))p" "$raw" | base64 -d | xclip -selection clipboard

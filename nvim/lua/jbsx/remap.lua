@@ -22,10 +22,10 @@ vim.keymap.set({ 'n', 'x' }, '<leader>Y', '\"+Y')
 vim.keymap.set({ 'n', 'x' }, '<A-j>', 'J')
 vim.keymap.set({ 'n', 'x' }, '<A-k>', 'K')
 
-vim.keymap.set({ 'n', 'x' }, 'J', '<C-d>')
-vim.keymap.set({ 'n', 'x' }, 'K', '<C-u>')
-vim.keymap.set({ 'n', 'x' }, 'H', '^')
-vim.keymap.set({ 'n', 'x' }, 'L', '$')
+--vim.keymap.set({ 'n', 'x' }, 'J', '<C-d>')
+--vim.keymap.set({ 'n', 'x' }, 'K', '<C-u>')
+--vim.keymap.set({ 'n', 'x' }, 'H', '^')
+--vim.keymap.set({ 'n', 'x' }, 'L', '$')
 
 -----------------------Telescope-----------------------
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
@@ -45,6 +45,13 @@ vim.keymap.set('n', '<leader>o', vim.diagnostic.open_float)
 vim.keymap.set('n', '<A-E>', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<A-e>', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+--------------------------LaTeX--------------------------
+vim.keymap.set("n", "<leader>ll", function()
+  vim.cmd("VimtexCompile")
+  vim.cmd("VimtexView")
+end)
+
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer

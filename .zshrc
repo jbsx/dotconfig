@@ -1,16 +1,22 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-export PATH=$PATH:/opt/nvim/
+export PATH=$PATH:/opt/nvim-linux-x86_64/bin
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+if [[ -o interactive ]] && [[ -z "$TMUX" ]]; then
+    tmux attach-session -t 0 || tmux new-session -s 0
+fi
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="cloud"
+#ZSH_THEME="af-magic"
+#ZSH_THEME="clean"
+ZSH_THEME="eastwood"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -89,6 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='nvim'
 # fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -106,13 +113,39 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-# Boot into sway on login
-if [ "$(tty)" = "/dev/tty1" ] ; then
-    # Your environment variables
-    export QT_QPA_PLATFORM=wayland
-    export MOZ_ENABLE_WAYLAND=1
-    export MOZ_WEBRENDER=1
-    export XDG_SESSION_TYPE=wayland
-    export XDG_CURRENT_DESKTOP=sway
-    exec sway
-fi
+# Boot into sway on login (replaced by greetd; run `sway` manually if greetd is ever disabled)
+#if [ "$(tty)" = "/dev/tty1" ] ; then
+#    export XDG_SESSION_TYPE=wayland
+#    export XDG_CURRENT_DESKTOP=sway
+#    exec sway
+#fi
+
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/home/jbsx/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+#random app images
+export PATH="/home/jbsx/Apps:$PATH"
+
+# opencode
+export PATH=/home/jbsx/.opencode/bin:$PATH
+
+export DISPLAY=:0
+
+# bun completions
+[ -s "/home/jbsx/.bun/_bun" ] && source "/home/jbsx/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
+# Launch polybar on every monitor. Kills any running instance first.
 
-# Terminate already running bar instances
-killall -q polybar
+pkill -x polybar 2>/dev/null
+# wait for processes to die
+while pgrep -u "$(id -u)" -x polybar >/dev/null; do sleep 0.5; done
 
-# Wait until the processes have been shut down
-while pgrep -x polybar >/dev/null; do sleep 1; done
-
-# Launch
-polybar &
-
-echo "Bar launched..."
+polybar --reload main >/tmp/polybar-main.log 2>&1 &
+# second bar only when the DVI monitor is connected (desktop only)
+if xrandr --query | grep -q "^DVI-D-0 connected"; then
+    polybar --reload dvi  >/tmp/polybar-dvi.log  2>&1 &
+fi

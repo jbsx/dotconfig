@@ -24,6 +24,7 @@ require("lazy").setup({
         end
     },
     "itchyny/lightline.vim",
+    "junegunn/goyo.vim",
 
     "tpope/vim-sensible",
 
@@ -50,7 +51,7 @@ require("lazy").setup({
 
     'stevearc/conform.nvim',
 
-    { 'glacambre/firenvim', build = ":call firenvim#install(0)" }
+    { 'glacambre/firenvim', build = ":call firenvim#install(0)" },
 
     --{
     --    'glacambre/firenvim',
@@ -63,4 +64,14 @@ require("lazy").setup({
     --        vim.fn["firenvim#install"](0)
     --    end
     --}
+
+    {
+        "lervag/vimtex",
+        lazy = false,     -- we don't want to lazy load VimTeX
+        -- tag = "v2.15", -- uncomment to pin to a specific release
+        init = function()
+            -- VimTeX configuration goes here, e.g.
+            vim.g.vimtex_view_method = "zathura"
+        end
+    }
 })

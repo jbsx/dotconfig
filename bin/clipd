@@ -1,0 +1,26 @@
+#!/bin/sh
+# X11 clipboard history daemon — cliphist-style, built on xclip.
+# Polls the CLIPBOARD selection, stores unique entries (newest first),
+# keeps the last 50. Each entry is base64-encoded so multiline/binary
+# content round-trips safely.
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/cliphist"
+raw="$cache/raw"
+tmp="$cache/.raw.tmp"
+mkdir -p "$cache"
+
+prev=""
+while :; do
+    cur=$(timeout 2 xclip -o -selection clipboard 2>/dev/null | tr -d '\000')
+    [ "$cur" = "$prev" ] && { sleep 0.5; continue; }
+    prev="$cur"
+    [ -n "$cur" ] || continue
+    enc=$(printf '%s' "$cur" | base64 -w0)
+    if [ -s "$raw" ]; then
+        # newest first, drop any duplicate, cap at 50
+        { printf '%s\n' "$enc"; grep -vxF "$enc" "$raw"; } | head -n 50 > "$tmp"
+    else
+        printf '%s\n' "$enc" > "$tmp"
+    fi
+    mv "$tmp" "$raw"
+    sleep 0.5
+done

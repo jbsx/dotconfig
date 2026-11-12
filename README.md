@@ -1,8 +1,15 @@
-- OS: Arch Linux
-- Desktop Env: i3wm
-- Editor: NeoVim
-- Terminal: Alacritty
-- Shell: Bash
-- Msc. tools: Polybar, Rofi with dmenu, xclip, rofi-greenclip,
-              gruvbox,Redshift, Nitrogen, tmux, xbindkeys, lightdm,
-              mpv, autojump, bash_it,
+- OS: Fedora / Debian
+- Desktop Env: i3wm (sway configs kept for Wayland)
+- Bar: Polybar (Everforest Dark), compositor: picom
+- Editor: NeoVim (lazy.nvim)
+- Terminal: Alacritty, tmux
+- Shell: zsh + oh-my-zsh
+- Msc. tools: rofi, flameshot, nitrogen, dunst, blueman, xclip clipboard history (bin/clipd, bin/clippick)
+
+## New machine (Fedora + i3)
+
+    git clone git@github.com:jbsx/dotconfig.git && cd dotconfig && ./install-fedora.sh
+
+## Update the repo from this machine
+
+    ./copyfiles.sh

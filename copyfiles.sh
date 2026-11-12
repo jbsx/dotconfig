@@ -1,19 +1,11 @@
 #!/bin/bash
-cp -r $HOME/.config/nvim/ ./
-
-cp -r $HOME/.config/sway/ ./
-cp -r $HOME/.config/waybar/ ./
-cp -r $HOME/.config/i3/ ./
-cp -r $HOME/.config/polybar/ ./
-cp -r $HOME/.config/wofi/ ./
-
-cp -r $HOME/.config/rofi/ ./
-cp -r $HOME/.config/mpv/ ./
-cp -r $HOME/.scripts ./
-cp $HOME/.alacritty.toml ./
-cp $HOME/.bashrc ./
-cp $HOME/.bash_profile ./
-cp $HOME/.tmux.conf ./
-cp $HOME/.config/greenclip.toml ./
-cp $HOME/.xbindkeysrc ./
-cp $HOME/.clang-format ./
+# Snapshot this machine's configs into the repo. Run from the repo root.
+set -e
+cp -r "$HOME/.config/nvim/." nvim/
+cp "$HOME/.config/i3/config" i3/config
+cp "$HOME/.config/polybar/config.ini" "$HOME/.config/polybar/launch.sh" polybar/
+cp "$HOME/.config/picom/picom.conf" picom/
+cp "$HOME/.config/alacritty/alacritty.toml" alacritty/
+cp "$HOME/.config/Thunar/accels.scm" thunar/
+cp "$HOME"/.local/bin/{clipd,clippick,polybar_volume.sh,toggle_audio.sh} bin/
+cp "$HOME"/{.zshrc,.zshenv,.bashrc,.tmux.conf,.Xresources,.xinitrc} ./

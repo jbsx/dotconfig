@@ -19,11 +19,11 @@ white = "0xdfbf8e"
 yellow = "0xe78a4e"
 
 [colors.primary]
-background = "0x151515"
+background = "0x000000"
 foreground = "0xdfbf8e"
 
 [font]
-size = 19
+size = 14
 
 [font.normal]
 family = "LiterationMono Nerd Font"
@@ -35,8 +35,8 @@ mods = "Control"
 
 [[keyboard.bindings]]
 action = "IncreaseFontSize"
-key = "Equals"
-mods = "Control"
+key = "Plus"
+mods = "Control | Shift"
 
 [[keyboard.bindings]]
 action = "DecreaseFontSize"
@@ -69,9 +69,11 @@ mods = "Alt"
 history = 500
 multiplier = 3
 
-[shell]
-program = "/usr/bin/tmux"
+#[terminal.shell]
+#program = "/usr/bin/tmux"
 
 [window]
 decorations = "none"
-opacity = 0.90
+opacity = 0.95
+
+[terminal]
