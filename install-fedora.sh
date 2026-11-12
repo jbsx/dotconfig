@@ -8,7 +8,7 @@ BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 echo "==> Installing packages"
 sudo dnf install -y --skip-unavailable \
     i3 i3lock polybar picom rofi alacritty nitrogen dunst flameshot \
-    xclip xrandr setxkbmap xrdb xinit blueman playerctl brightnessctl \
+    xclip xrandr setxkbmap xrdb xinit xinput blueman playerctl brightnessctl \
     pavucontrol pulseaudio-utils NetworkManager-tui jq htop s-tui \
     zsh tmux neovim git curl unzip ripgrep fd-find gcc make \
     thunar firefox lightdm lightdm-gtk
@@ -40,6 +40,9 @@ done
 chmod +x ~/.local/bin/{clipd,clippick,polybar_volume.sh,toggle_audio.sh} ~/.config/polybar/launch.sh ~/.xinitrc
 mkdir -p ~/Pictures/Screenshots
 
+echo "==> Installing touchpad/TrackPoint config"
+sudo install -Dm644 "$REPO/X11/40-libinput.conf" /etc/X11/xorg.conf.d/40-libinput.conf
+
 echo "==> Installing LiterationMono Nerd Font"
 if ! fc-list | grep -q "LiterationMono Nerd Font"; then
     tmp=$(mktemp -d)
@@ -62,4 +65,4 @@ echo "Log out and pick the i3 session (or run startx). Laptop-specific things to
 echo "  - ~/.config/i3/config: the xrandr line and 'workspace N output' pins are for the desktop monitors"
 echo "  - ~/.config/polybar/config.ini: network 'interface' (see 'ip link') and temperature 'hwmon-path'"
 echo "  - ~/.local/bin/toggle_audio.sh: sink names are for the desktop sound card"
-echo "  - touchpad tap-to-click: /etc/X11/xorg.conf.d/40-libinput.conf"
+echo "  - touchpad/TrackPoint speed + natural scroll: X11/40-libinput.conf (AccelSpeed, -1..1)"
